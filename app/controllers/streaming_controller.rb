@@ -2,9 +2,12 @@ require "csv"
 
 class StreamingController < ApplicationController
   def index
-    conf = CSV.read("integrate.conf")
-
-    create_playlist("http://", conf)
+    conf = [
+     [2,1.0],
+     [3,0.6],
+     [4,0.8],
+    ]
+    create_playlist("http://192.168.0.2:3001/", conf)
   end
 
 protected
@@ -18,7 +21,7 @@ protected
       playlist = playlist[4, playlist.length]
       
     
-      playlist = playlist.map{|e| e.gsub(/__URL__/, "#{url}/public/data/#{sentence_no}/#{pitch}/__URL__")}
+      playlist = playlist.map{|e| e.gsub(/__URL__/, "#{url}/data/#{sentence_no}/#{pitch}/__URL__")}
       
       new_playlist = new_playlist + 
         ["#EXT-X-DISCONTINUITY-SEQUENCE:#{discontinuity_sequence}",
