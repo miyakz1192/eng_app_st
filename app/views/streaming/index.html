@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../icon.ico" />
+		<link rel="stylesheet" type="text/css" href="../style.css" />
+		<!-- using hls.js via CDN-->
+		<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+		<!-- using hls.js with downloading -->
+		<!-- <script src="../js/hls.js"></script> -->
+		<script src="set-video.js"></script>
+		<title>eng app streaming service!!!</title>
+	</head>
+	<body>
+		<h1>
+			eng app streaming with your favorite
+		</h1>
+		<p>
+			eng app streaming with your favorite
+		</p>
+		<video id="video" controls preload="metadata" width="854" height="480">
+			<p>
+        your browser doesn't support this site video format(m3u8). please use other browser support it.
+			</p>
+		</video>
+    <script>setVideo("./new_playlist.m3u8");</script>
+    <!-- <script>setVideo("./output.m3u8");</script> -->
+	</body>
+</html>
