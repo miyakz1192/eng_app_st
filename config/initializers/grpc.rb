@@ -18,11 +18,11 @@ Thread.new do
 end
 
 
-module GRPC
-  extend Logging.globally
-end
-
-Logging.logger['GRPC'].level = :debug
-
+#module GRPC
+#  extend Logging.globally
+#end
+#
+#Logging.logger['GRPC'].level = :debug
+#
 
 puts "DEBUG: grpc done!!!"

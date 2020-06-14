@@ -7,12 +7,16 @@ require './lib/proto/sentence_services_pb'
 
 def main
   stub = SentenceService::Stub.new('localhost:50051', :this_channel_is_insecure)
-  u = User.new(id: "1")
+  u = User.new({id: "1"})
 
   puts u.class.name
   puts u.class.inspect
+  puts u.class.class.name
+  puts u.class.class.inspect
   puts u.inspect
-  stub.list_by_worst(u)
+  puts u.class.methods.grep /encode/
+  stub.list_by_worst(u) # ERRRO
+  #stub.list_by_worst({id: "1"})
   #message = stub.list_by_worst(nil).message
   #p "Greeting: #{message}"
 end
