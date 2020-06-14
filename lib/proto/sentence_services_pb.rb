@@ -2,7 +2,7 @@
 # Source: lib/proto/sentence.proto for package ''
 
 require 'grpc'
-require 'lib/proto/sentence_pb'
+require './lib/proto/sentence_pb.rb'
 
 module SentenceService
   # CosmosService is microservices composed of a suite of small and lightweight services.
