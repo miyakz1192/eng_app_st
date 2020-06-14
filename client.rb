@@ -1,0 +1,21 @@
+this_dir = File.expand_path(File.dirname(__FILE__))
+lib_dir = File.join(this_dir, 'lib/proto')
+$LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
+
+require 'grpc'
+require './lib/proto/sentence_services_pb'
+
+def main
+  stub = SentenceService::Stub.new('localhost:50051', :this_channel_is_insecure)
+  u = User.new(id: "1")
+
+  puts u.class.name
+  puts u.class.inspect
+  puts u.inspect
+  stub.list_by_worst(u)
+  #message = stub.list_by_worst(nil).message
+  #p "Greeting: #{message}"
+end
+
+main
+

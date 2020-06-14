@@ -17,4 +17,12 @@ Thread.new do
   s.run_till_terminated_or_interrupted([1, 'int', 'SIGQUIT'])
 end
 
+
+module GRPC
+  extend Logging.globally
+end
+
+Logging.logger['GRPC'].level = :debug
+
+
 puts "DEBUG: grpc done!!!"
