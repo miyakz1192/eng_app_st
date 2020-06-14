@@ -56,3 +56,7 @@ gem 'mysql2'
 gem 'dotenv-rails'
 
 gem 'rename'
+
+gem 'google-protobuf'
+gem 'grpc-tools'
+gem 'grpc'
