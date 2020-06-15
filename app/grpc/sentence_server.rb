@@ -8,11 +8,13 @@ require './lib/proto/sentence_services_pb.rb'
 require './lib/proto/sentence_pb.rb'
 
 class SentenceServer < SentenceService::Service
-  def list_by_worst(user)
-    raise "TEST ERROR"
+
+
+  puts "Sentence Server!!!"
+  def list_by_worst(user, _unused_call)
     `echo list_by_worst >> /tmp/list_by_worst`
     puts "list_by_worst called!!!"
-    return Sentences.new({message: [Sentence.new({no: 1, score: 1})]})
+    return Sentence.new(no: 1)
   end
 end
 

@@ -2,7 +2,7 @@
 # Source: lib/proto/sentence.proto for package ''
 
 require 'grpc'
-require './lib/proto/sentence_pb.rb'
+require './lib/proto/sentence_pb'
 
 module SentenceService
   # CosmosService is microservices composed of a suite of small and lightweight services.
@@ -14,7 +14,7 @@ module SentenceService
     self.unmarshal_class_method = :decode
     self.service_name = 'SentenceService'
 
-    rpc :ListByWorst, User, Sentences
+    rpc :ListByWorst, User, Sentence
   end
 
   Stub = Service.rpc_stub_class

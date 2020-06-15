@@ -13,6 +13,8 @@ puts "DEBUG: handle complete"
 # User could also choose to run server via call to run_till_terminated
 puts "DEBUG: run_till_terminated_or_interrupted"
 
+#s.run_till_terminated_or_interrupted([1, 'int', 'SIGQUIT'])
+
 Thread.new do
   s.run_till_terminated_or_interrupted([1, 'int', 'SIGQUIT'])
 end

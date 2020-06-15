@@ -21,5 +21,19 @@ def main
   #p "Greeting: #{message}"
 end
 
-main
+def main2
+  stub = SentenceService::Stub.new('localhost:50051', :this_channel_is_insecure)
+  u = User.new({id: "1"})
+
+  puts u.class.name
+  puts u.class.inspect
+  puts u.class.class.name
+  puts u.class.class.inspect
+  puts u.inspect
+  puts u.class.methods.grep /encode/
+  sentence = stub.list_by_worst(u) # ERRRO
+  p "output=#{sentence.inspect}"
+end
+
+main2
 
