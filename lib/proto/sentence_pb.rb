@@ -5,14 +5,16 @@ require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("lib/proto/sentence.proto", :syntax => :proto3) do
-    add_message "Sentence" do
+    add_message "erpc.Sentence" do
       optional :no, :int64, 1
     end
-    add_message "User" do
+    add_message "erpc.User" do
       optional :id, :string, 1
     end
   end
 end
 
-Sentence = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("Sentence").msgclass
-User = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("User").msgclass
+module Erpc
+  Sentence = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("erpc.Sentence").msgclass
+  User = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("erpc.User").msgclass
+end
