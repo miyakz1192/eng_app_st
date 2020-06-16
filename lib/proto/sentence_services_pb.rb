@@ -6,7 +6,7 @@ require './lib/proto/sentence_pb'
 
 module Erpc
   module SentenceService
-    # CosmosService is microservices composed of a suite of small and lightweight services.
+    # SentenceService is microservices composed of a suite of small and lightweight services.
     class Service
 
       include GRPC::GenericService
@@ -15,7 +15,7 @@ module Erpc
       self.unmarshal_class_method = :decode
       self.service_name = 'erpc.SentenceService'
 
-      rpc :ListByWorst, User, Sentence
+      rpc :ListByWorst, User, Sentences
     end
 
     Stub = Service.rpc_stub_class
