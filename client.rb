@@ -1,9 +1,12 @@
 this_dir = File.expand_path(File.dirname(__FILE__))
-lib_dir = File.join(this_dir, './lib/proto/')
+lib_dir = File.join(this_dir, 'erpc')
 $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 
+puts $LOAD_PATH.grep /erpc/
+
+
 require 'grpc'
-require './lib/proto/sentence_services_pb'
+require 'sentence_services_pb.rb'
 
 def main
   stub = SentenceService::Stub.new('localhost:50051', :this_channel_is_insecure)
@@ -22,6 +25,8 @@ def main
 end
 
 def main2
+
+  puts "start client"
   stub = Erpc::SentenceService::Stub.new('localhost:50051', :this_channel_is_insecure)
   u = Erpc::User.new({id: "req_from_client_1"})
 
@@ -33,6 +38,8 @@ def main2
   puts u.class.methods.grep /encode/
   sentence = stub.list_by_worst(u) # ERRRO
   p "output=#{sentence.inspect}"
+
+  puts "end client"
 end
 
 main2

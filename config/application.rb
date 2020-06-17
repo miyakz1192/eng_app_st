@@ -15,5 +15,10 @@ module EngAppSt
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    #
+
+    #adding load path(developping and production)
+    #thanks https://one-person.hatenablog.jp/entry/2019/01/16/181521
+    #config.eager_load_paths += %W( #{config.root}/erpc )
   end
 end

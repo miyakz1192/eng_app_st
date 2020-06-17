@@ -1,11 +1,11 @@
 
 this_dir = File.expand_path(File.dirname(__FILE__))
-lib_dir = File.join(this_dir, 'lib/proto')
+lib_dir = File.join(this_dir, 'eprc')
 $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 
 require 'grpc'
-require './lib/proto/sentence_services_pb.rb'
-require './lib/proto/sentence_pb.rb'
+require 'erpc/sentence_services_pb.rb'
+require 'erpc/sentence_pb.rb'
 
 class SentenceServer < Erpc::SentenceService::Service
 
