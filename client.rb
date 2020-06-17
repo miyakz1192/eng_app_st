@@ -1,12 +1,12 @@
 this_dir = File.expand_path(File.dirname(__FILE__))
-lib_dir = File.join(this_dir, 'erpc')
+lib_dir = File.join(this_dir, './lib')
 $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 
 puts $LOAD_PATH.grep /erpc/
 
 
 require 'grpc'
-require 'sentence_services_pb.rb'
+require 'erpc/sentence_services_pb.rb'
 
 def main
   stub = SentenceService::Stub.new('localhost:50051', :this_channel_is_insecure)
