@@ -5,15 +5,33 @@ require 'erpc/sentence_services_pb.rb'
 
 class StreamingController < ApplicationController
   def index
-    conf = [
-     [2,1.0],
-     [3,0.6],
-     [4,0.8],
-    ]
+    #playlist instruction is follow form(array of array)
+    #in one array, first element is sentence_no, second is pitch
+    #conf = [
+    # [2,1.0],
+    # [3,0.6],
+    # [4,0.8],
+    #]
+    #create_playlist's first arg is ts files's url 
+    #                  second arg is below conf
+    conf = sentence_to_playlist_instruction(sentences(1))
     create_playlist("http://192.168.0.2:3001/", conf)
   end
 
 protected
+
+  def sentence_to_entry(erpc_sentence)
+    sentence_no = erpc_sentence.no
+    score       = erpc_sentence.score 
+    res =  [sentence_no, 1.0]
+    res += [sentence_no, 0.8] if score < 0
+    res += [sentence_no, 0.6] if score < -2 
+    return res 
+  end
+
+  def sentence_to_playlist_instruction(erpc_sentences)
+    erpc_sentences.map{|s| sentence_to_entry(s)}.flatten
+  end
 
   def sentences(user_id)
     puts "start client"
