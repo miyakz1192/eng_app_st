@@ -30,7 +30,7 @@ protected
   end
 
   def sentence_to_playlist_instruction(erpc_sentences)
-    erpc_sentences.map{|s| sentence_to_entry(s)}.flatten
+    erpc_sentences.sentences.map{|s| sentence_to_entry(s)}.flatten
   end
 
   def sentences(user_id)
@@ -38,10 +38,8 @@ protected
     stub = Erpc::SentenceService::Stub.new('eng-app-app-service:50051', :this_channel_is_insecure)
     u = Erpc::User.new({id: user_id})
   
-    sentence = stub.list_by_worst(u)
-    puts "output=#{sentence.inspect}"
-  
-    puts "end client"
+    sentences = stub.list_by_worst(u)
+    return sentences
   end
 
   def create_playlist(url, conf)
