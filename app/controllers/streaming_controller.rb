@@ -15,7 +15,7 @@ class StreamingController < ApplicationController
     #create_playlist's first arg is ts files's url 
     #                  second arg is below conf
     conf = sentence_to_playlist_instruction(sentences(1))
-    create_playlist("http://192.168.0.2:3001/", conf)
+    create_playlist("http://miyakz1192.ddns.net:3001/", conf)
   end
 
 protected
@@ -23,14 +23,24 @@ protected
   def sentence_to_entry(erpc_sentence)
     sentence_no = erpc_sentence.no
     score       = erpc_sentence.score 
-    res =  [sentence_no, 1.0]
-    res += [sentence_no, 0.8] if score < 0
-    res += [sentence_no, 0.6] if score < -2 
+    res = []
+    res << [sentence_no, 1.0]
+    res << [sentence_no, 0.8] if score < 0
+    res << [sentence_no, 0.6] if score < -2 
     return res 
   end
 
   def sentence_to_playlist_instruction(erpc_sentences)
-    erpc_sentences.sentences.map{|s| sentence_to_entry(s)}.flatten
+    puts "DEBUG inspect"
+
+    res = []
+
+    erpc_sentences.sentences.each do |s|
+      res += sentence_to_entry(s)
+    end
+    puts "#{res.inspect}"
+
+    return res
   end
 
   def sentences(user_id)
@@ -39,11 +49,11 @@ protected
     u = Erpc::User.new({id: user_id})
   
     sentences = stub.list_by_worst(u)
+    puts "end client"
     return sentences
   end
 
   def create_playlist(url, conf)
-    sentences(1)
     new_playlist = []
     discontinuity_sequence = 0
     conf.each do |sentence_no, pitch|
