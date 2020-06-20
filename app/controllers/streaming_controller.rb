@@ -32,11 +32,11 @@ protected
     puts "#{request.env['REMOTE_ADDR']}"
     puts "#{request.env['HTTP_CLIENT_IP']}"
     puts "==========================="
-    pp request.inspect
+    #pp request.inspect
     puts "-------------------------------------------------"
     puts request.env.keys.grep /ENVOY/
     puts "==========================="
-    pp request.env.inspect
+    #pp request.env.inspect
     puts "DEBUG: ts_file_url end"
 
     if place == :local
