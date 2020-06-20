@@ -1,4 +1,7 @@
 require "csv"
+require 'grpc'
+require 'erpc/sentence_services_pb.rb'
+
 
 class StreamingController < ApplicationController
   def index
@@ -12,7 +15,19 @@ class StreamingController < ApplicationController
 
 protected
 
+  def sentences(user_id)
+    puts "start client"
+    stub = Erpc::SentenceService::Stub.new('eng-app-app-service:50051', :this_channel_is_insecure)
+    u = Erpc::User.new({id: user_id})
+  
+    sentence = stub.list_by_worst(u)
+    puts "output=#{sentence.inspect}"
+  
+    puts "end client"
+  end
+
   def create_playlist(url, conf)
+    sentences(1)
     new_playlist = []
     discontinuity_sequence = 0
     conf.each do |sentence_no, pitch|
