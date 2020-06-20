@@ -74,7 +74,7 @@ protected
   def sentences(user_id)
     puts "start client"
     stub = Erpc::SentenceService::Stub.new('eng-app-app-service:50051', :this_channel_is_insecure)
-    u = Erpc::User.new({id: user_id})
+    u = Erpc::User.new({id: user_id.to_i})
   
     sentences = stub.list_by_worst(u)
     puts "end client"
