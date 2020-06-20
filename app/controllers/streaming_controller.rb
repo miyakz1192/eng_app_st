@@ -6,6 +6,8 @@ require "pp"
 
 class StreamingController < ApplicationController
   def index
+    user_id = 1 #default
+    user_id = params[:user_id] if params[:user_id]
     #playlist instruction is follow form(array of array)
     #in one array, first element is sentence_no, second is pitch
     #conf = [
@@ -15,7 +17,7 @@ class StreamingController < ApplicationController
     #]
     #create_playlist's first arg is ts files's url 
     #                  second arg is below conf
-    conf = sentence_to_playlist_instruction(sentences(1))
+    conf = sentence_to_playlist_instruction(sentences(user_id))
     create_playlist(ts_file_url, conf)
   end
 
