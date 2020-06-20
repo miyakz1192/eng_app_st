@@ -1,6 +1,7 @@
 require "csv"
 require 'grpc'
 require 'erpc/sentence_services_pb.rb'
+require "pp"
 
 
 class StreamingController < ApplicationController
@@ -15,10 +16,33 @@ class StreamingController < ApplicationController
     #create_playlist's first arg is ts files's url 
     #                  second arg is below conf
     conf = sentence_to_playlist_instruction(sentences(1))
-    create_playlist("http://miyakz1192.ddns.net:3001/", conf)
+    create_playlist(ts_file_url, conf)
   end
 
 protected
+
+  def ts_file_url
+    place = :remote
+    url = ""
+    puts "DEBUG: ts_file_url start"
+    puts "#{request.remote_ip}"
+    puts "#{request.env['HTTP_X_FORWARDED_FOR']}"
+    puts "#{request.env['REMOTE_ADDR']}"
+    puts "#{request.env['HTTP_CLIENT_IP']}"
+    puts "==========================="
+    pp request.inspect
+    puts "==========================="
+    pp request.env.inspect
+    puts "DEBUG: ts_file_url end"
+
+    if place == :local
+      url = "http://192.168.0.2:3001"
+    else
+      url = "http://miyakz1192.ddns.net:3001/"
+    end 
+
+    return url 
+  end
 
   def sentence_to_entry(erpc_sentence)
     sentence_no = erpc_sentence.no
