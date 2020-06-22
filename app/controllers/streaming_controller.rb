@@ -8,6 +8,7 @@ class StreamingController < ApplicationController
   def index
     user_id = 1 #default
     user_id = params[:user_id] if params[:user_id]
+
     #playlist instruction is follow form(array of array)
     #in one array, first element is sentence_no, second is pitch
     #conf = [
@@ -23,8 +24,18 @@ class StreamingController < ApplicationController
 
 protected
 
+  def called_location
+    return :local if params[:location] == "local"
+    return :global if params[:location] == "global"
+    raise "location params is local or global only"
+  end
+
+  def called_from_local?
+    return true if called_location == :local
+    return false
+  end
+
   def ts_file_url
-    place = :remote
     url = ""
     puts "DEBUG: ts_file_url start"
     puts "#{request.remote_ip}"
@@ -39,7 +50,7 @@ protected
     #pp request.env.inspect
     puts "DEBUG: ts_file_url end"
 
-    if place == :local
+    if called_from_local?
       url = "http://192.168.0.2:3001"
     else
       url = "http://miyakz1192.ddns.net:3001/"
