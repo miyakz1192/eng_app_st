@@ -87,7 +87,7 @@ protected
     stub = Erpc::SentenceService::Stub.new('eng-app-app-service:50051', :this_channel_is_insecure)
     u = Erpc::User.new({id: user_id.to_i})
   
-    sentences = stub.list_by_worst(u)
+    sentences = stub.list_sentences(u)
     puts "end client"
     return sentences
   end
