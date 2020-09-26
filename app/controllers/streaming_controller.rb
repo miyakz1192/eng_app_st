@@ -51,9 +51,9 @@ protected
     puts "DEBUG: ts_file_url end"
 
     if called_from_local?
-      url = "http://192.168.0.2:3001"
+      url = ENV.fetch("ENG_APP_ST_URL_CALLED_FROM_LOCAL")
     else
-      url = "http://miyakz1192.ddns.net:3001/"
+      url = ENV.fetch("ENG_APP_ST_URL_CALLED_FROM_GLOBAL")
     end 
 
     return url 
